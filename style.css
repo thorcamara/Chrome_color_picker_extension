@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  background-color: #fff;
+  width: 350px;
+}
+
+.container :where(.picker, header, .all-colors) {
+  display: flex;
+  align-items: center;
+  border-radius: 0 0 35px 35px;
+}
