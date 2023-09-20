@@ -98,3 +98,41 @@ const showColors = () => {
   const pickedColorsContainer = document.querySelector(".colors-list");
   pickedColorsContainer.classList.toggle("hide", pickedColors.length === 0);
 };
+
+const hexToRgb = (hex) => {
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgb(${r}, ${g}, ${b})`;
+};
+
+const activateEyeDropper = async () => {
+  document.body.style.display = "none";
+  try {
+    const { sRGBHex } = await new EyeDropper().open();
+
+    if (!pickedColors.includes(sRGBHex)) {
+      pickedColors.push(sRGBHex);
+      localStorage.setItem("colors-list", JSON.stringify(pickedColors));
+    }
+
+    showColors();
+  } catch (error) {
+    alert("Filed to copy the color code!");
+  } finally {
+    document.body.style.display = "block";
+  }
+};
+
+const clearAllColors = () => {
+  pickedColors = [];
+  localStorage.removeItem("colors-list");
+  showColors();
+};
+
+clearBtn.addEventListener('click', clearAllColors);
+pickerBtn.addEventListener('click', activateEyeDropper);
+exportBtn.addEventListener('click', exportColors);
+
+showColors();
