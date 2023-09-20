@@ -67,3 +67,20 @@ header #clear-btn {
 header #clear-btn:hover {
   color: #2e7d32;
 }
+
+.colors-list.hide {
+  display: none;
+}
+
+.colors-list .all-colors {
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 10px 0 0;
+}
+
+.all-colors .color {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: calc(100% / 3);
+}
