@@ -40,3 +40,16 @@
   border-radius: 5px;
   transition: all 0.3s ease;
 }
+
+.picker #picker-btn:hover,
+.picker #export-btn:hover {
+  background-color: #2e7d32;
+}
+
+.colors-list {
+  margin: 10px 15px;
+}
+
+.colors-list header {
+  justify-content: space-between;
+}
