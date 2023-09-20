@@ -141,3 +141,13 @@ header #clear-btn:hover {
   font-weight: bold;
   margin-right: 5px;
 }
+
+.value {
+  cursor: pointer;
+}
+
+span.close-popup {
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+}
