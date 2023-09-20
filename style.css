@@ -53,3 +53,17 @@
 .colors-list header {
   justify-content: space-between;
 }
+
+header .title {
+  font-size: 1rem;
+}
+
+header #clear-btn {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #43a047;
+}
+
+header #clear-btn:hover {
+  color: #2e7d32;
+}
