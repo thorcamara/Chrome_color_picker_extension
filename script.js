@@ -11,11 +11,62 @@ const copyToClipboard = async (text, element) => {
   try {
     await navigator.clipboard.writeText(text);
     element.innerText = "Copied!";
-    // Resseting element text after 1 second
     setTimeout(() => {
       element.innerText = text;
     }, 1000);
   } catch (error) {
     alert("Filed to copy text!");
   }
+};
+
+const exportColors = () => {
+  const colorText = pickedColors.join("\n");
+  const blob = new Blob([colorText], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Colors.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+const createColorPopup = (color) => {
+  const popup = document.createElement("div");
+  popup.classList.add("color-popup");
+  popup.innerHTML = `
+      <div class="color-popup-content">
+          <span class="close-popup">x</span>
+          <div class="color-info">
+              <div class="color-preview" style="background: ${color};"></div>
+              <div class="color-details">
+                  <div class="color-value">
+                      <span class="label">Hex:</span>
+                      <span class="value hex" data-color="${color}">${color}</span>
+                  </div>
+                  <div class="color-value">
+                      <span class="label">RGB:</span>
+                      <span class="value rgb" data-color="${color}">${hexToRgb(color)}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  `;
+
+  const closePopup = popup.querySelector(".close-popup");
+  closePopup.addEventListener('click', () => {
+    document.body.removeChild(popup);
+    currentPopup = null;
+  });
+
+  const colorValues = popup.querySelectorAll(".value");
+  colorValues.forEach((value) => {
+    value.addEventListener('click', (e) => {
+      const text = e.currentTarget.innerText;
+      copyToClipboard(text, e.currentTarget);
+    });
+  });
+
+  return popup;
 };
